@@ -15,7 +15,7 @@ Outputs:
 `objective_value` - Urea Flux
 `calculated_flux_array` - Flux Distribution
 """
-function calculate_optimal_flux_distribution(stoichMat::Array{Float64,2},reactionBounds::Array{Float64,2},speciesBounds::Array{Float64,2},objective::Array{Float64,2},minFlag::Bool=true)
+function calculate_optimal_flux_distribution(stoichMat::Array{Float64,2},reactionBounds::Array{Float64,2},speciesBounds::Array{Float64,2},objective::Array{Float64,1})
     
 
     #size of stoichiometric_matrix
@@ -33,12 +33,9 @@ function calculate_optimal_flux_distribution(stoichMat::Array{Float64,2},reactio
     GLPK.add_rows(lp_problem, numSpecies);
     GLPK.add_cols(lp_problem, numFluxes);
 
-    # Minimization vs Maximization
-    if minFlag == true
-        GLPK.set_obj_dir(lp_problem, GLPK.MIN);
-    else
-     GLPK.set_obj_dir(lp_problem, GLPK.MAX);
-    end
+    #always minimize
+    GLPK.set_obj_dir(lp_problem, GLPK.MIN);
+    
 
     #flux bounds for objective function
     for i=1:numFluxes
