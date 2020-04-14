@@ -25,7 +25,7 @@ The next set of files are the ``.jl`` files.  These files are responsible for al
 
 ``flux.jl`` uses linear programming to determine the Urea flux in the system.
 
-``solve.jl`` runs the linear programming problem in ``flux.jl`` and outputs an answer.
+``solve.jl`` runs the linear programming problem in ``flux.jl`` and outputs an answer, calling the stoichiometric matrix, species bounds, v bounds, and objective of the programming.
 
 ### Ensuring the Stoichiometric Array is Properly Balanced
 
@@ -44,6 +44,6 @@ By executing the following command, the user can test if the stoichiometric arra
  
  ```jl
     julia > include("flux.jl")
-    julia > calculate_optimal_flux_distributions(S,speciesBounds,reactionBounds,object;min_flag=true)
+    julia > include("solve.jl")
  ```
- This returns several values, including ``objective_value`` which is the Urea flux, and ``calculated_flux_array`` which is the flux distribution.  I found the Urea optimal flux to be 0.03299 mmol/gDW-hr out of the system.
+This returns several values, including ``objective_value`` which is the Urea flux, and ``calculated_flux_array`` which is the flux distribution.  I found the Urea optimal flux to be 0.03299 mmol/gDW-hr out of the system.
