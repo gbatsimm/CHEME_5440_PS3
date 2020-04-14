@@ -10,7 +10,7 @@ The first set of files are raw data files which are imported as .csv files.  Thi
 
 ``atom_matrix.csv`` gives the elemental composition of each of the 18 relevant species which are all composed of C, H, N, O, P, and S.
 
-``vBounds.csv`` dictates the minimum and maximum rates of each of the 21 listed reactions.  If vmin is negative, then the reaction is reversible.  Otherwise, it is modeled as irreversible.
+``vmin_vmaxBounds.csv`` dictates the minimum and maximum rates of each of the 21 listed reactions.  If vmin is negative, then the reaction is reversible.  Otherwise, it is modeled as irreversible.  This contains the significant Park et al data, which contributes to a large drop in Urea flux.  
 
 ``speciesBounds.csv`` dictates the change in concentration of each species over time.  In SS, these values are all zero.
 
@@ -46,4 +46,4 @@ By executing the following command, the user can test if the stoichiometric arra
     julia > include("flux.jl")
     julia > calculate_optimal_flux_distributions(S,speciesBounds,reactionBounds,object;min_flag=true)
  ```
- This returns several values, including ``objective_value`` which is the Urea flux, and ``calculated_flux_array`` which is the flux distribution.  I found the Urea optimal flux to be ____mmol/gDW-hr.
+ This returns several values, including ``objective_value`` which is the Urea flux, and ``calculated_flux_array`` which is the flux distribution.  I found the Urea optimal flux to be 0.03299 mmol/gDW-hr out of the system.
