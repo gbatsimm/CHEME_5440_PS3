@@ -12,16 +12,20 @@ The first set of files are raw data files which are imported as .csv files.  Thi
 
 ``vBounds.csv`` dictates the minimum and maximum rates of each of the 21 listed reactions.  If vmin is negative, then the reaction is reversible.  Otherwise, it is modeled as irreversible.
 
+``speciesBounds.csv`` dictates the change in concentration of each species over time.  In SS, these values are all zero.
+
 ``stoichArray_elementalBalances.xlsx`` is an excel sheet with labels containing the information housed in the preceding .csv files.  It is useful to know which reaction is labeled as which, and which species is which.
 
 
 The next set of files are the ``.jl`` files.  These files are responsible for all the computation in the project.
 
-``Include.jl`` ensures that all of the necessary packages have been loaded to the file path
+``Include.jl`` ensures that all of the necessary packages have been loaded to the file path.
 
-``check_stoic_balances.jl`` ensures that the stoichiometric array was properly assemebled
+``check_stoic_balances.jl`` ensures that the stoichiometric array was properly assemebled.
 
-``flux.jl`` uses linear programming to determine the Urea flux in the system
+``flux.jl`` uses linear programming to determine the Urea flux in the system.
+
+``solve.jl`` runs the linear programming problem in ``flux.jl`` and outputs an answer.
 
 ### Ensuring the Stoichiometric Array is Properly Balanced
 
