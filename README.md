@@ -25,6 +25,21 @@ The next set of files are the ``.jl`` files.  These files are responsible for al
 
 ### Ensuring the Stoichiometric Array is Properly Balanced
 
+By executing the following command, the user can test if the stoichiometric array is properly balanced:
+
 ```jl
   julia > include("check_stoic_balances.jl")
  ```
+ This is done by multiplying the transpose of A=``atom_matrix.csv`` S=``stoichArray_justV.csv`` .  If the returned matix contains all zeros, then all six elements, C, H, N, O, P, and S are balanced across all six principle reactions.
+ 
+ ### Estimating Fluxes
+ 
+ The Urea flux is first found by providing bounds on the reaction rate of each of the 21 reactions from ``vBounds.csv``.  The upper and lower bounds of each species is defined as zero, as the entire system is in steady state.  
+ 
+ The following commands are issued:
+ 
+ ```jl
+    julia > include("flux.jl")
+    julia > calculate_optimal_flux_distributions(S,speciesBounds,reactionBounds,object;min_flag=true)
+ ```
+ This returns several values, including ``objective_value`` which is the Urea flux, and ``calculated_flux_array`` which is the flux distribution.  I found the Urea optimal flux to be ____mmol/gDW-hr.
