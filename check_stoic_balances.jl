@@ -1,3 +1,7 @@
+#check_stoic_balances imports the atom matrix and stoichiometric matrix. 
+#If epsilon returns all zeros, stoichiometric matrix is balanced.
+
+#checks neccessary packages are in place
 include("Include.jl")
 
 #import atom matrix
